@@ -1,0 +1,519 @@
+```html
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+<meta charset="UTF-8">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>bazaarly.in — shop everything</title>
+
+<link rel="stylesheet" href="css/style.css">
+
+</head>
+
+
+<body>
+
+
+<!-- =========================
+     TOP NAVIGATION
+========================= -->
+
+<div class="topnav">
+
+  <div class="logo">
+    bazaarly<span>.in</span>
+  </div>
+
+
+  <div class="search-bar">
+
+    <select id="catSelect">
+
+      <option value="All">
+        All
+      </option>
+
+    </select>
+
+
+    <input
+      id="searchInput"
+      type="text"
+      placeholder="Search bazaarly.in"
+    />
+
+
+    <button
+      id="searchBtn"
+      aria-label="Search"
+    >
+      🔍
+    </button>
+
+  </div>
+
+
+  <div
+    class="nav-item"
+    id="accountNav"
+  >
+
+    Hello, sign in
+
+    <b>
+      Account &amp; Lists
+    </b>
+
+  </div>
+
+
+  <button
+    class="cart-btn"
+    id="cartOpenBtn"
+  >
+
+    🛒
+
+    <span
+      class="cart-count"
+      id="cartCount"
+    >
+      0
+    </span>
+
+    <span class="cart-label">
+      Cart
+    </span>
+
+  </button>
+
+</div>
+
+
+
+<!-- =========================
+     CATEGORY NAVIGATION
+========================= -->
+
+<div
+  class="subnav"
+  id="subnav"
+></div>
+
+
+
+<!-- =========================
+     MOVING BANNER
+========================= -->
+
+<div class="hero">
+
+  <div class="hero-inner">
+
+    <div
+      class="hero-slider"
+      id="heroSlider"
+    >
+
+
+      <!-- ELECTRONICS -->
+
+      <div class="hero-slide active">
+
+        <div class="slide-content">
+
+          <span class="offer-tag">
+            🔥 BIG OFFER
+          </span>
+
+
+          <h1>
+            Electronics Sale
+          </h1>
+
+
+          <p>
+            Up to 50% OFF on Electronics
+          </p>
+
+
+          <button
+            class="shop-now"
+            data-category="Electronics"
+          >
+            Shop Now
+          </button>
+
+        </div>
+
+
+        <div class="slide-image">
+
+          <img
+            src="images/elect-banner.jpg"
+            alt="Electronics Sale"
+          >
+
+        </div>
+
+      </div>
+
+
+
+      <!-- FASHION -->
+
+      <div class="hero-slide">
+
+        <div class="slide-content">
+
+          <span class="offer-tag">
+            👗 TRENDING
+          </span>
+
+
+          <h1>
+            Fashion Collection
+          </h1>
+
+
+          <p>
+            Latest styles starting from ₹499
+          </p>
+
+
+          <button
+            class="shop-now"
+            data-category="Fashion"
+          >
+            Shop Now
+          </button>
+
+        </div>
+
+
+        <div class="slide-image">
+
+          <img
+            src="images/fas-banner.jpg"
+            alt="Fashion Collection"
+          >
+
+        </div>
+
+      </div>
+
+
+
+      <!-- HOME -->
+
+      <div class="hero-slide">
+
+        <div class="slide-content">
+
+          <span class="offer-tag">
+            🏠 HOME DEALS
+          </span>
+
+
+          <h1>
+            Upgrade Your Home
+          </h1>
+
+
+          <p>
+            Great deals on Home &amp; Kitchen
+          </p>
+
+
+          <button
+            class="shop-now"
+            data-category="Home"
+          >
+            Shop Now
+          </button>
+
+        </div>
+
+
+        <div class="slide-image">
+
+          <img
+            src="images/house-banner.jpg"
+            alt="Home and Kitchen"
+          >
+
+        </div>
+
+      </div>
+
+
+
+      <!-- BOOKS -->
+
+      <div class="hero-slide">
+
+        <div class="slide-content">
+
+          <span class="offer-tag">
+            📚 SPECIAL OFFER
+          </span>
+
+
+          <h1>
+            Books &amp; Learning
+          </h1>
+
+
+          <p>
+            Books starting from just ₹199
+          </p>
+
+
+          <button
+            class="shop-now"
+            data-category="Books"
+          >
+            Shop Now
+          </button>
+
+        </div>
+
+
+        <div class="slide-image">
+
+          <img
+            src="images/book-banner.jpg"
+            alt="Books and Learning"
+          >
+
+        </div>
+
+      </div>
+
+
+
+      <!-- SLIDER PREVIOUS BUTTON -->
+
+      <button
+        class="slider-btn prev"
+        id="prevSlide"
+        aria-label="Previous slide"
+      >
+        ‹
+      </button>
+
+
+
+      <!-- SLIDER NEXT BUTTON -->
+
+      <button
+        class="slider-btn next"
+        id="nextSlide"
+        aria-label="Next slide"
+      >
+        ›
+      </button>
+
+
+
+      <!-- SLIDER DOTS -->
+
+      <div
+        class="slider-dots"
+        id="sliderDots"
+      >
+
+        <span
+          class="dot active"
+        ></span>
+
+        <span class="dot"></span>
+
+        <span class="dot"></span>
+
+        <span class="dot"></span>
+
+      </div>
+
+    </div>
+
+
+
+    <!-- HERO INFO -->
+
+    <div class="hero-info">
+
+      <p>
+        Free delivery on orders above ₹499 · Easy 7-day returns
+      </p>
+
+    </div>
+
+  </div>
+
+</div>
+
+
+
+<!-- =========================
+     PRODUCTS
+========================= -->
+
+<main>
+
+  <div
+    class="results-bar"
+    id="resultsBar"
+  ></div>
+
+
+  <div
+    class="grid"
+    id="productGrid"
+  ></div>
+
+</main>
+
+
+
+<!-- =========================
+     FOOTER
+========================= -->
+
+<footer>
+
+  Bazaarly demo storefront ·
+  Django + MongoDB backend ·
+  Built for practice — not a real store
+
+</footer>
+
+
+
+<!-- =========================
+     CART OVERLAY
+========================= -->
+
+<div
+  class="overlay"
+  id="overlay"
+></div>
+
+
+
+<!-- =========================
+     CART DRAWER
+========================= -->
+
+<div
+  class="drawer"
+  id="cartDrawer"
+>
+
+
+  <div class="drawer-head">
+
+    <h2>
+      Your cart
+    </h2>
+
+
+    <button
+      class="drawer-close"
+      id="drawerClose"
+    >
+      ✕
+    </button>
+
+  </div>
+
+
+
+  <div
+    class="drawer-body"
+    id="cartBody"
+  ></div>
+
+
+
+  <div
+    class="drawer-foot"
+    id="cartFoot"
+    style="display:none;"
+  >
+
+
+    <div class="subtotal-row">
+
+      <span>
+        Subtotal
+      </span>
+
+
+      <b id="subtotalVal">
+        ₹0
+      </b>
+
+    </div>
+
+
+    <button
+      class="checkout-btn"
+      id="checkoutBtn"
+    >
+      Proceed to checkout
+    </button>
+
+  </div>
+
+</div>
+
+
+
+<!-- =========================
+     LOGIN / CHECKOUT MODAL
+========================= -->
+
+<div
+  class="modal-wrap"
+  id="checkoutModalWrap"
+>
+
+
+  <div
+    class="modal"
+    id="checkoutModal"
+  ></div>
+
+</div>
+
+
+
+<!-- =========================
+     TOAST
+========================= -->
+
+<div
+  class="toast"
+  id="toast"
+></div>
+
+
+
+<!-- =========================
+     JAVASCRIPT
+========================= -->
+
+<script src="js/api.js"></script>
+
+<script src="js/app.js"></script>
+
+
+</body>
+
+</html>
+```
