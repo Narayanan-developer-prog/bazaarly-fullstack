@@ -1,519 +1,366 @@
 ```html
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<meta charset="UTF-8">
+  <title>bazaarly.in — shop everything</title>
 
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <!-- Existing stylesheet -->
+  <link rel="stylesheet" href="css/style.css">
 
-<title>bazaarly.in — shop everything</title>
+  <!-- Login screen styles -->
+  <style>
+    #loginGate {
+      min-height: 100vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 24px;
+      box-sizing: border-box;
+      background: #e8edf5;
+      font-family: Arial, sans-serif;
+    }
 
-<link rel="stylesheet" href="css/style.css">
+    #loginGate[hidden],
+    #storefrontApp[hidden] {
+      display: none !important;
+    }
 
+    .login-card {
+      width: 100%;
+      max-width: 400px;
+      padding: 32px;
+      box-sizing: border-box;
+      background: #fff;
+      border-radius: 14px;
+      box-shadow: 0 8px 30px rgba(0, 0, 0, 0.12);
+    }
+
+    .login-logo {
+      text-align: center;
+      font-size: 30px;
+      font-weight: bold;
+      color: #172554;
+    }
+
+    .login-logo span {
+      color: #f59e0b;
+    }
+
+    .login-card h2 {
+      margin: 22px 0 8px;
+      text-align: center;
+      color: #172554;
+    }
+
+    .login-subtitle {
+      margin-bottom: 24px;
+      text-align: center;
+      color: #64748b;
+    }
+
+    .login-card label {
+      display: block;
+      margin: 14px 0 6px;
+      font-weight: 600;
+      color: #334155;
+    }
+
+    .login-card input {
+      width: 100%;
+      padding: 12px;
+      box-sizing: border-box;
+      border: 1px solid #cbd5e1;
+      border-radius: 7px;
+      font-size: 15px;
+    }
+
+    .login-card button {
+      width: 100%;
+      margin-top: 22px;
+      padding: 13px;
+      border: 0;
+      border-radius: 7px;
+      background: #172554;
+      color: white;
+      font-size: 16px;
+      font-weight: bold;
+      cursor: pointer;
+    }
+
+    .login-card button:hover {
+      background: #243b75;
+    }
+
+    #loginError {
+      margin-top: 12px;
+      color: #dc2626;
+      font-size: 14px;
+    }
+
+    .login-register {
+      margin-top: 22px;
+      text-align: center;
+      color: #64748b;
+      font-size: 14px;
+    }
+
+    .login-register a {
+      color: #172554;
+      font-weight: bold;
+    }
+  </style>
 </head>
-
 
 <body>
 
+  <!-- FIRST SCREEN: LOGIN -->
+  <section id="loginGate">
+    <div class="login-card">
 
-<!-- =========================
-     TOP NAVIGATION
-========================= -->
-
-<div class="topnav">
-
-  <div class="logo">
-    bazaarly<span>.in</span>
-  </div>
-
-
-  <div class="search-bar">
-
-    <select id="catSelect">
-
-      <option value="All">
-        All
-      </option>
-
-    </select>
-
-
-    <input
-      id="searchInput"
-      type="text"
-      placeholder="Search bazaarly.in"
-    />
-
-
-    <button
-      id="searchBtn"
-      aria-label="Search"
-    >
-      🔍
-    </button>
-
-  </div>
-
-
-  <div
-    class="nav-item"
-    id="accountNav"
-  >
-
-    Hello, sign in
-
-    <b>
-      Account &amp; Lists
-    </b>
-
-  </div>
-
-
-  <button
-    class="cart-btn"
-    id="cartOpenBtn"
-  >
-
-    🛒
-
-    <span
-      class="cart-count"
-      id="cartCount"
-    >
-      0
-    </span>
-
-    <span class="cart-label">
-      Cart
-    </span>
-
-  </button>
-
-</div>
-
-
-
-<!-- =========================
-     CATEGORY NAVIGATION
-========================= -->
-
-<div
-  class="subnav"
-  id="subnav"
-></div>
-
-
-
-<!-- =========================
-     MOVING BANNER
-========================= -->
-
-<div class="hero">
-
-  <div class="hero-inner">
-
-    <div
-      class="hero-slider"
-      id="heroSlider"
-    >
-
-
-      <!-- ELECTRONICS -->
-
-      <div class="hero-slide active">
-
-        <div class="slide-content">
-
-          <span class="offer-tag">
-            🔥 BIG OFFER
-          </span>
-
-
-          <h1>
-            Electronics Sale
-          </h1>
-
-
-          <p>
-            Up to 50% OFF on Electronics
-          </p>
-
-
-          <button
-            class="shop-now"
-            data-category="Electronics"
-          >
-            Shop Now
-          </button>
-
-        </div>
-
-
-        <div class="slide-image">
-
-          <img
-            src="images/elect-banner.jpg"
-            alt="Electronics Sale"
-          >
-
-        </div>
-
+      <div class="login-logo">
+        bazaarly<span>.in</span>
       </div>
 
+      <h2>Welcome Back!</h2>
 
-
-      <!-- FASHION -->
-
-      <div class="hero-slide">
-
-        <div class="slide-content">
-
-          <span class="offer-tag">
-            👗 TRENDING
-          </span>
-
-
-          <h1>
-            Fashion Collection
-          </h1>
-
-
-          <p>
-            Latest styles starting from ₹499
-          </p>
-
-
-          <button
-            class="shop-now"
-            data-category="Fashion"
-          >
-            Shop Now
-          </button>
-
-        </div>
-
-
-        <div class="slide-image">
-
-          <img
-            src="images/fas-banner.jpg"
-            alt="Fashion Collection"
-          >
-
-        </div>
-
-      </div>
-
-
-
-      <!-- HOME -->
-
-      <div class="hero-slide">
-
-        <div class="slide-content">
-
-          <span class="offer-tag">
-            🏠 HOME DEALS
-          </span>
-
-
-          <h1>
-            Upgrade Your Home
-          </h1>
-
-
-          <p>
-            Great deals on Home &amp; Kitchen
-          </p>
-
-
-          <button
-            class="shop-now"
-            data-category="Home"
-          >
-            Shop Now
-          </button>
-
-        </div>
-
-
-        <div class="slide-image">
-
-          <img
-            src="images/house-banner.jpg"
-            alt="Home and Kitchen"
-          >
-
-        </div>
-
-      </div>
-
-
-
-      <!-- BOOKS -->
-
-      <div class="hero-slide">
-
-        <div class="slide-content">
-
-          <span class="offer-tag">
-            📚 SPECIAL OFFER
-          </span>
-
-
-          <h1>
-            Books &amp; Learning
-          </h1>
-
-
-          <p>
-            Books starting from just ₹199
-          </p>
-
-
-          <button
-            class="shop-now"
-            data-category="Books"
-          >
-            Shop Now
-          </button>
-
-        </div>
-
-
-        <div class="slide-image">
-
-          <img
-            src="images/book-banner.jpg"
-            alt="Books and Learning"
-          >
-
-        </div>
-
-      </div>
-
-
-
-      <!-- SLIDER PREVIOUS BUTTON -->
-
-      <button
-        class="slider-btn prev"
-        id="prevSlide"
-        aria-label="Previous slide"
-      >
-        ‹
-      </button>
-
-
-
-      <!-- SLIDER NEXT BUTTON -->
-
-      <button
-        class="slider-btn next"
-        id="nextSlide"
-        aria-label="Next slide"
-      >
-        ›
-      </button>
-
-
-
-      <!-- SLIDER DOTS -->
-
-      <div
-        class="slider-dots"
-        id="sliderDots"
-      >
-
-        <span
-          class="dot active"
-        ></span>
-
-        <span class="dot"></span>
-
-        <span class="dot"></span>
-
-        <span class="dot"></span>
-
-      </div>
-
-    </div>
-
-
-
-    <!-- HERO INFO -->
-
-    <div class="hero-info">
-
-      <p>
-        Free delivery on orders above ₹499 · Easy 7-day returns
+      <p class="login-subtitle">
+        Sign in to continue shopping
       </p>
 
-    </div>
+      <form id="initialLoginForm">
+        <label for="loginEmail">Email Address</label>
+        <input
+          type="email"
+          id="loginEmail"
+          placeholder="Enter your email"
+          autocomplete="username"
+          required
+        >
 
-  </div>
+        <label for="loginPassword">Password</label>
+        <input
+          type="password"
+          id="loginPassword"
+          placeholder="Enter your password"
+          autocomplete="current-password"
+          required
+        >
 
-</div>
+        <button type="submit" id="initialLoginBtn">
+          Login
+        </button>
 
+        <div id="loginError" role="alert"></div>
+      </form>
 
-
-<!-- =========================
-     PRODUCTS
-========================= -->
-
-<main>
-
-  <div
-    class="results-bar"
-    id="resultsBar"
-  ></div>
-
-
-  <div
-    class="grid"
-    id="productGrid"
-  ></div>
-
-</main>
-
-
-
-<!-- =========================
-     FOOTER
-========================= -->
-
-<footer>
-
-  Bazaarly demo storefront ·
-  Django + MongoDB backend ·
-  Built for practice — not a real store
-
-</footer>
-
-
-
-<!-- =========================
-     CART OVERLAY
-========================= -->
-
-<div
-  class="overlay"
-  id="overlay"
-></div>
-
-
-
-<!-- =========================
-     CART DRAWER
-========================= -->
-
-<div
-  class="drawer"
-  id="cartDrawer"
->
-
-
-  <div class="drawer-head">
-
-    <h2>
-      Your cart
-    </h2>
-
-
-    <button
-      class="drawer-close"
-      id="drawerClose"
-    >
-      ✕
-    </button>
-
-  </div>
-
-
-
-  <div
-    class="drawer-body"
-    id="cartBody"
-  ></div>
-
-
-
-  <div
-    class="drawer-foot"
-    id="cartFoot"
-    style="display:none;"
-  >
-
-
-    <div class="subtotal-row">
-
-      <span>
-        Subtotal
-      </span>
-
-
-      <b id="subtotalVal">
-        ₹0
-      </b>
+      <div class="login-register">
+        New to Bazaarly?
+        <a href="#" id="initialRegisterLink">Create an account</a>
+      </div>
 
     </div>
+  </section>
 
+  <!-- EXISTING HOME PAGE: FEATURES PRESERVED -->
+  <div id="storefrontApp" hidden>
 
-    <button
-      class="checkout-btn"
-      id="checkoutBtn"
-    >
-      Proceed to checkout
-    </button>
+    <!-- TOP NAVIGATION -->
+    <div class="topnav">
+      <div class="logo">
+        bazaarly<span>.in</span>
+      </div>
+
+      <div class="search-bar">
+        <select id="catSelect">
+          <option value="All">All</option>
+        </select>
+
+        <input
+          id="searchInput"
+          type="text"
+          placeholder="Search bazaarly.in"
+        >
+
+        <button id="searchBtn" aria-label="Search">
+          🔍
+        </button>
+      </div>
+
+      <div class="nav-item" id="accountNav">
+        Hello, sign in
+        <b>Account &amp; Lists</b>
+      </div>
+
+      <button class="cart-btn" id="cartOpenBtn">
+        🛒
+        <span class="cart-count" id="cartCount">0</span>
+        <span class="cart-label">Cart</span>
+      </button>
+    </div>
+
+    <!-- CATEGORY NAVIGATION -->
+    <div class="subnav" id="subnav"></div>
+
+    <!-- MOVING BANNER -->
+    <div class="hero">
+      <div class="hero-inner">
+
+        <div class="hero-slider" id="heroSlider">
+
+          <!-- ELECTRONICS -->
+          <div class="hero-slide active">
+            <div class="slide-content">
+              <span class="offer-tag">🔥 BIG OFFER</span>
+              <h1>Electronics Sale</h1>
+              <p>Up to 50% OFF on Electronics</p>
+              <button class="shop-now" data-category="Electronics">
+                Shop Now
+              </button>
+            </div>
+
+            <div class="slide-image">
+              <img src="images/elect-banner.jpg" alt="Electronics Sale">
+            </div>
+          </div>
+
+          <!-- FASHION -->
+          <div class="hero-slide">
+            <div class="slide-content">
+              <span class="offer-tag">👗 TRENDING</span>
+              <h1>Fashion Collection</h1>
+              <p>Latest styles starting from ₹499</p>
+              <button class="shop-now" data-category="Fashion">
+                Shop Now
+              </button>
+            </div>
+
+            <div class="slide-image">
+              <img src="images/fas-banner.jpg" alt="Fashion Collection">
+            </div>
+          </div>
+
+          <!-- HOME -->
+          <div class="hero-slide">
+            <div class="slide-content">
+              <span class="offer-tag">🏠 HOME DEALS</span>
+              <h1>Upgrade Your Home</h1>
+              <p>Great deals on Home &amp; Kitchen</p>
+              <button class="shop-now" data-category="Home">
+                Shop Now
+              </button>
+            </div>
+
+            <div class="slide-image">
+              <img src="images/house-banner.jpg" alt="Home and Kitchen">
+            </div>
+          </div>
+
+          <!-- BOOKS -->
+          <div class="hero-slide">
+            <div class="slide-content">
+              <span class="offer-tag">📚 SPECIAL OFFER</span>
+              <h1>Books &amp; Learning</h1>
+              <p>Books starting from just ₹199</p>
+              <button class="shop-now" data-category="Books">
+                Shop Now
+              </button>
+            </div>
+
+            <div class="slide-image">
+              <img src="images/book-banner.jpg" alt="Books and Learning">
+            </div>
+          </div>
+
+          <!-- SLIDER CONTROLS -->
+          <button
+            class="slider-btn prev"
+            id="prevSlide"
+            aria-label="Previous slide"
+          >‹</button>
+
+          <button
+            class="slider-btn next"
+            id="nextSlide"
+            aria-label="Next slide"
+          >›</button>
+
+          <div class="slider-dots" id="sliderDots">
+            <span class="dot active"></span>
+            <span class="dot"></span>
+            <span class="dot"></span>
+            <span class="dot"></span>
+          </div>
+
+        </div>
+
+        <div class="hero-info">
+          <p>
+            Free delivery on orders above ₹499 · Easy 7-day returns
+          </p>
+        </div>
+
+      </div>
+    </div>
+
+    <!-- PRODUCTS -->
+    <main>
+      <div class="results-bar" id="resultsBar"></div>
+      <div class="grid" id="productGrid"></div>
+    </main>
+
+    <!-- FOOTER -->
+    <footer>
+      Bazaarly demo storefront · Django + PostgreSQL backend ·
+      Built for practice — not a real store
+    </footer>
+
+    <!-- CART OVERLAY -->
+    <div class="overlay" id="overlay"></div>
+
+    <!-- CART DRAWER -->
+    <div class="drawer" id="cartDrawer">
+
+      <div class="drawer-head">
+        <h2>Your cart</h2>
+        <button class="drawer-close" id="drawerClose">✕</button>
+      </div>
+
+      <div class="drawer-body" id="cartBody"></div>
+
+      <div class="drawer-foot" id="cartFoot" style="display:none;">
+        <div class="subtotal-row">
+          <span>Subtotal</span>
+          <b id="subtotalVal">₹0</b>
+        </div>
+
+        <button class="checkout-btn" id="checkoutBtn">
+          Proceed to checkout
+        </button>
+      </div>
+
+    </div>
+
+    <!-- TOAST -->
+    <div class="toast" id="toast"></div>
 
   </div>
-
-</div>
-
+  <!-- END OF STOREFRONT APP -->
 
 
-<!-- =========================
-     LOGIN / CHECKOUT MODAL
-========================= -->
-
-<div
-  class="modal-wrap"
-  id="checkoutModalWrap"
->
+  <!-- LOGIN / CHECKOUT MODAL
+       Moved outside storefrontApp so it works before login -->
+  <div class="modal-wrap" id="checkoutModalWrap">
+    <div class="modal" id="checkoutModal"></div>
+  </div>
 
 
-  <div
-    class="modal"
-    id="checkoutModal"
-  ></div>
-
-</div>
-
-
-
-<!-- =========================
-     TOAST
-========================= -->
-
-<div
-  class="toast"
-  id="toast"
-></div>
-
-
-
-<!-- =========================
-     JAVASCRIPT
-========================= -->
-
-<script src="js/api.js"></script>
-
-<script src="js/app.js"></script>
-
+  <!-- EXISTING JAVASCRIPT FILES -->
+  <script src="js/api.js"></script>
+  <script src="js/app.js"></script>
 
 </body>
-
 </html>
 ```
