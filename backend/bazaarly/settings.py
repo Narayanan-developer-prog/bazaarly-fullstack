@@ -2,10 +2,11 @@
 import os
 from pathlib import Path
 from dotenv import load_dotenv
+from django.core.exceptions import ImproperlyConfigured
 
 BASE_DIR = Path(__file__).resolve().parent.parent
 
-# Load environment variables from backend/.env
+# Load local environment variables from backend/.env
 load_dotenv(BASE_DIR / ".env")
 
 
@@ -13,14 +14,28 @@ load_dotenv(BASE_DIR / ".env")
 # DJANGO SECURITY
 # =========================================================
 
-SECRET_KEY = os.environ.get(
-    "DJANGO_SECRET_KEY",
-    "dev-only-secret-key-change-before-deployment",
-)
+DEBUG = os.environ.get("DEBUG", "False").strip().lower() == "true"
 
-DEBUG = os.environ.get("DEBUG", "True").lower() == "true"
+SECRET_KEY = os.environ.get("DJANGO_SECRET_KEY")
 
-ALLOWED_HOSTS = ["*"]
+# Allow a development-only key for local development.
+# Production must use a secure key from environment variables.
+if not SECRET_KEY:
+    if DEBUG:
+        SECRET_KEY = "dev-only-secret-key-for-local-development"
+    else:
+        raise ImproperlyConfigured(
+            "DJANGO_SECRET_KEY must be configured in production."
+        )
+
+ALLOWED_HOSTS = [
+    host.strip()
+    for host in os.environ.get(
+        "ALLOWED_HOSTS",
+        "bazaarly-fullstack.vercel.app,localhost,127.0.0.1",
+    ).split(",")
+    if host.strip()
+]
 
 
 # =========================================================
@@ -59,7 +74,29 @@ MIDDLEWARE = [
 # CORS
 # =========================================================
 
-CORS_ALLOW_ALL_ORIGINS = True
+CORS_ALLOW_ALL_ORIGINS = False
+
+CORS_ALLOWED_ORIGINS = [
+    origin.strip()
+    for origin in os.environ.get(
+        "CORS_ALLOWED_ORIGINS",
+        (
+            "http://localhost:5500,"
+            "http://127.0.0.1:5500,"
+            "https://bazaarly-fullstack.vercel.app"
+        ),
+    ).split(",")
+    if origin.strip()
+]
+
+CSRF_TRUSTED_ORIGINS = [
+    origin.strip()
+    for origin in os.environ.get(
+        "CSRF_TRUSTED_ORIGINS",
+        "https://bazaarly-fullstack.vercel.app",
+    ).split(",")
+    if origin.strip()
+]
 
 
 # =========================================================
@@ -69,6 +106,9 @@ CORS_ALLOW_ALL_ORIGINS = True
 ROOT_URLCONF = "bazaarly.urls"
 
 WSGI_APPLICATION = "bazaarly.wsgi.application"
+
+# Recognize HTTPS requests behind a trusted reverse proxy.
+SECURE_PROXY_SSL_HEADER = ("HTTP_X_FORWARDED_PROTO", "https")
 
 
 # =========================================================
@@ -167,10 +207,7 @@ DEFAULT_AUTO_FIELD = "django.db.models.BigAutoField"
 # JWT AUTHENTICATION
 # =========================================================
 
-JWT_SECRET = os.environ.get(
-    "JWT_SECRET",
-    SECRET_KEY,
-)
+JWT_SECRET = os.environ.get("JWT_SECRET", SECRET_KEY)
 
 
 # =========================================================
@@ -179,17 +216,12 @@ JWT_SECRET = os.environ.get(
 
 EMAIL_BACKEND = "django.core.mail.backends.smtp.EmailBackend"
 
-EMAIL_HOST = os.environ.get(
-    "EMAIL_HOST",
-    "smtp.gmail.com",
-)
+EMAIL_HOST = os.environ.get("EMAIL_HOST", "smtp.gmail.com")
 
-EMAIL_PORT = int(
-    os.environ.get("EMAIL_PORT", "587")
-)
+EMAIL_PORT = int(os.environ.get("EMAIL_PORT", "587"))
 
 EMAIL_USE_TLS = (
-    os.environ.get("EMAIL_USE_TLS", "True").lower() == "true"
+    os.environ.get("EMAIL_USE_TLS", "True").strip().lower() == "true"
 )
 
 EMAIL_HOST_USER = os.environ.get("EMAIL_HOST_USER")
