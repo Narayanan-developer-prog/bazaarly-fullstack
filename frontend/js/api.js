@@ -1,6 +1,6 @@
 // All calls to the Django backend go through here.
 // Change this if your backend runs on a different port.
-const API_BASE = "http://127.0.0.1:8000/api";
+const API_BASE = "https://bazaarly-fullstack.vercel.app/api";
 
 function authHeaders(){
   const token = localStorage.getItem("bazaarly_token");
